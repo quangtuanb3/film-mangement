@@ -1,0 +1,33 @@
+.error {
+    color: red;
+    display: none;
+    font-size: 10px;
+}
+
+.input-custom:invalid[focused="true"] ~ span {
+    display: block;
+}
+
+.input-custom:invalid[focused="true"] {
+    border-color: red !important;
+}
+.btn-custom{
+    font-size: 10px;
+}
+th, td {
+    text-align: center;
+}
+th:nth-child(2){
+    min-width: 250px;
+}
+/*#director {*/
+/*    width: 100% !important;*/
+/*}*/
+
+/*#actors {*/
+/*    width: 100% !important;*/
+/*}*/
+
+/*#categories {*/
+/*    width: 100% !important;*/
+/*}*/

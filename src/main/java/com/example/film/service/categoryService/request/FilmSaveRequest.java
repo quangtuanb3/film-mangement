@@ -1,4 +1,4 @@
-package com.example.film.service.film.request;
+package com.example.film.service.categoryService.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

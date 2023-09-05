@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="layout.html::header">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Create Film
+    </button>
+    <div class="row justify-content-end">
+        <div class="col-md-6">
+            <form onsubmit="onSearch(event)">
+                <div class="input-group">
+                    <input type="search" class="form-control" id="search" name="q" placeholder="Tìm kiếm">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog" style="max-width: 800px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="filmForm">
+                        <div class="row" id="formBody">
+                            <div class="form-group col-6">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="director">Director</label>
+                                <select style="width: 100%!important; padding: .375rem .75rem!important;"
+                                        class="form-control js-example-basic-single" id="director" name="director">
+                                    <option th:each="director : ${directors}" th:value="${director.value}"
+                                            th:text="${director.name}"/>
+                                </select>
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="publishDate">Publish Date</label>
+                                <input type="date" class="form-control" id="publishDate" name="publishDate">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="categories">Categories</label>
+                                <select style="width: 100%!important;; padding: .375rem .75rem!important;"
+                                        class="js-example-basic-multiple form-control" id="categories" name="categories"
+                                        multiple="multiple">
+                                    <option th:each="category : ${categories}" th:value="${category.value}"
+                                            th:text="${category.name}"></option>
+                                </select>
+                            </div>
+                            <div class="form-group col-12">
+                                <label for="actors">Actors</label>
+                                <select style="width: 100%!important; padding: .375rem .75rem!important;"
+                                        class="js-example-basic-multiple form-control" id="actors" name="actors"
+                                        multiple="multiple">
+                                    <option th:each="actor : ${actors}" th:value="${actor.value}"
+                                            th:text="${actor.name}"/>
+                                </select>
+                            </div>
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+                            <button type="submit" id="form-submit-btn" class="btn btn-primary">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h4 class="pt-4">Film Detail</h4>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>No</th>
+            <th>Name</th>
+            <th>Director</th>
+            <th>Actors</th>
+            <th>Categories</th>
+            <th id="header-publish-date">Publish Date</th>
+            <th>Action</th>
+        </tr>
+        <tbody id="tBody">
+
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-end">
+        <nav aria-label="...">
+            <ul class="pagination" id="pagination">
+
+            </ul>
+        </nav>
+    </div>
+
+</div>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<th:block th:insert="layout.html::myScript"></th:block>
+<script src="/assets/film/film.js"></script>
+<script th:inline="javascript">
+    const actors = [[${actors}]]
+    const directors = [[${directors}]]
+    const categories = [[${categories}]]
+
+
+    function renderTBody(items) {
+        let str = '';
+        items.forEach(e => {
+            str += renderItemStr(e);
+        })
+        tBody.innerHTML = str;
+    }
+</script>
+
+</body>
+</html>

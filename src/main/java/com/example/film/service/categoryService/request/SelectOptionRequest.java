@@ -1,4 +1,4 @@
-package com.example.film.service.film.request;
+package com.example.film.service.categoryService.request;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
